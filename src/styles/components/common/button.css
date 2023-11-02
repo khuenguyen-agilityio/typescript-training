@@ -1,0 +1,23 @@
+.btn {
+  color: var(--color-light);
+  padding: var(--padding-sm);
+  border-radius: var(--radius-sm);
+  transition: background-color 0.5s;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-light);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary-light);
+}

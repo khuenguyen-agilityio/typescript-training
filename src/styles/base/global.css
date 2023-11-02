@@ -1,0 +1,11 @@
+.d-flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.d-flex-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

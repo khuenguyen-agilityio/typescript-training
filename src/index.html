@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="FoodRar, Khue Nguyen's JavaScript practice at AgilityIO."
+    />
+    <title>FoodRar</title>
+    <link rel="icon" href="assets/icons/food-rar.svg" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <!-- <link
+      rel="preload"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    > -->
+    <link
+      rel="preload"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+      href="assets/fontawesome/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body>
+    <header class="header d-flex-between-center">
+      <div class="wrapper-logo d-flex-center-center">
+        <a class="logo-link d-flex-center-center" href="#">
+          <span
+            ><img
+              src="assets/icons/card-logo.svg"
+              alt="Card blue logo"
+              width="28"
+              height="24"
+          /></span>
+          <span class="text-logo">FOODRAR</span>
+        </a>
+        <button
+          class="btn btn-menu d-flex-center-center"
+          type="button"
+          id="btn-sidebar"
+        >
+          <img
+            class="menu-icon"
+            src="assets/icons/menu-fold-line.svg"
+            alt="Menu fold line icon"
+            width="20"
+            height="20"
+          />
+        </button>
+      </div>
+      <nav class="wrapper-features d-flex-center-center">
+        <div class="wrapper-item d-flex-center-center">
+          <button
+            type="button"
+            class="btn btn-feature question d-flex-center-center"
+          >
+            <img
+              class="feature-icon"
+              src="assets/icons/question-fill.svg"
+              alt="Question gray fill icon"
+              width="20"
+              height="20"
+            />
+          </button>
+          <a href="#" class="text-regular">Help</a>
+          <button
+            type="button"
+            class="btn btn-feature notification d-flex-center-center"
+          >
+            <img
+              class="feature-icon"
+              src="assets/icons/notification.svg"
+              alt="Bell notification gray icon"
+              width="20"
+              height="20"
+            />
+          </button>
+          <button
+            type="button"
+            class="btn btn-feature settings d-flex-center-center"
+          >
+            <img
+              class="feature-icon"
+              src="assets/icons/settings.svg"
+              alt="Setting gray icon"
+              width="20"
+              height="20"
+            />
+          </button>
+        </div>
+        <img
+          class="avatar-img"
+          src="assets/images/avatar.png"
+          alt="A man smile image"
+          width="20"
+          height="20"
+        />
+        <p class="account-name text-regular">John</p>
+        <button class="btn btn-feature d-flex-center-center" type="button">
+          <img
+            class="arrow-down"
+            src="assets/icons/arrow-down.svg"
+            alt="Arrow down icon"
+            width="16"
+            height="16"
+          />
+        </button>
+      </nav>
+    </header>
+    <main>
+      <div class="container">
+        <aside class="sidebar close">
+          <ul class="sidebar-list"></ul>
+        </aside>
+        <section class="product-list">
+          <h1 class="product-title text-heading">Products</h1>
+          <ul class="wrapper-tabheading">
+            <li class="text-regular text-active" id="all-products-tab">
+              All products
+            </li>
+            <li class="text-regular" id="best-seller-tab">Best seller</li>
+          </ul>
+          <div class="wrapper-tools d-flex-between-center">
+            <form class="form-group" id="form-search">
+              <img
+                class="search-icon"
+                src="assets/icons/search-icon.svg"
+                alt="Search gray icon"
+                width="20"
+                height="20"
+              />
+              <input
+                class="search-input text-regular"
+                type="search"
+                placeholder="Search by name ..."
+                name="search-field"
+              />
+            </form>
+            <button
+              id="btn-add-product"
+              class="btn btn-primary d-flex-center-center"
+              type="button"
+            >
+              <img
+                src="assets/icons/plus-icon.svg"
+                alt="Plus white icon"
+                width="20"
+                height="20"
+              />
+              <span class="text-regular">Add new product</span>
+            </button>
+          </div>
+          <ul class="table-bordered text-regular"></ul>
+          <div class="no-product-found d-flex-center-center">
+            <img
+              src="assets/icons/404-product.svg"
+              alt="Sad search icon not found"
+            />
+            <p class="text-regular">No product has been found</p>
+          </div>
+          <div class="loading-spinner d-flex-center-center">
+            <i class="fas fa-spinner fa-pulse fa-lg"></i>
+            <i class="fas fa-spinner fa-pulse fa-3x"></i>
+          </div>
+        </section>
+      </div>
+      <section class="modal overlay d-flex-center-center">
+        <div class="overlay-close"></div>
+        <div class="add-modal d-flex-center-center">
+          <div class="wrapper-heading d-flex-center-center">
+            <h2 class="modal-title text-heading">title</h2>
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+          <form class="form-group" id="form-update">
+            <div class="wrapper-input d-flex-center-center">
+              <label class="input-label text-regular">Name :</label>
+              <input class="input-field" type="text" name="product-name" />
+            </div>
+            <p class="text-warning">warning text</p>
+            <div class="wrapper-input d-flex-center-center">
+              <label class="input-label text-regular">Price :</label>
+              <input
+                class="input-field"
+                type="number"
+                step="0.01"
+                name="product-price"
+                min="0"
+                oninput="this.value = this.value.replace(/-/g, '');"
+                required
+              />
+            </div>
+            <p class="text-warning">warning text</p>
+            <div class="wrapper-btn d-flex-center-center">
+              <input
+                class="btn btn-primary text-regular"
+                type="submit"
+                value="Confirm"
+              />
+              <button class="btn btn-secondary text-regular" type="button">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="delete-modal d-flex-center-center">
+          <div class="wrapper-heading d-flex-center-center">
+            <h2 class="modal-title text-heading">title</h2>
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+          <i class="fa-solid fa-trash fa-2x fa-shake"></i>
+          <div class="wrapper-btn d-flex-center-center">
+            <button class="btn btn-primary text-regular" type="button">
+              Delete
+            </button>
+            <button class="btn btn-secondary text-regular" type="button">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </section>
+      <ul class="notifications"></ul>
+    </main>
+    <script type="module" src="scripts/app.ts"></script>
+  </body>
+</html>

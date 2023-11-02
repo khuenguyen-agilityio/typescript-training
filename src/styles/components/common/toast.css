@@ -1,0 +1,113 @@
+.notifications {
+  position: fixed;
+  top: 100px;
+  right: 32px;
+}
+
+.notifications .toast {
+  position: relative;
+  overflow: hidden;
+  min-width: 400px;
+  padding: var(--padding-xm);
+  background-color: var(--color-light);
+  border: var(--border-sm);
+  border-radius: var(--radius-xs);
+  margin-bottom: var(--margin-sm);
+  animation: show_toast 0.3s ease forwards;
+}
+
+@keyframes show_toast {
+  0% {
+    transform: translateX(100%);
+  }
+  40% {
+    transform: translateX(-5%);
+  }
+  80% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+
+.notifications .toast.hide {
+  animation: hide_toast 0.3s ease forwards;
+}
+
+@keyframes hide_toast {
+  0% {
+    transform: translateX(-10px);
+  }
+  40% {
+    transform: translateX(0%);
+  }
+  80% {
+    transform: translateX(-5%);
+  }
+  100% {
+    transform: translateX(calc(100% + 32px));
+  }
+}
+
+.toast .wrapper-message {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.toast i:last-child {
+  margin-left: var(--margin-sm);
+  color: var(--color-input);
+}
+
+.toast i:last-child:hover {
+  cursor: pointer;
+  color: var(--color-dark);
+}
+
+.toast::before {
+  position: absolute;
+  content: "";
+  height: 3px;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+  100% {
+    width: 0%;
+  }
+}
+
+.toast.success::before {
+  background-color: var(--color-success);
+}
+
+.toast.error::before {
+  background-color: var(--color-secondary);
+}
+
+.toast.success .wrapper-message .fa-solid {
+  color: var(--color-success);
+}
+
+.toast.error .wrapper-message .fa-solid {
+  color: var(--color-secondary);
+}
+
+@media (max-width: 767px) {
+  .notifications {
+    right: 0px;
+  }
+
+  .notifications .toast {
+    min-width: 200px;
+  }
+
+  .toast .wrapper-message .text-regular {
+    font-size: var(--font-size-xs);
+  }
+}

@@ -1,0 +1,116 @@
+.product-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  padding: var(--padding-xl);
+  background-color: var(--color-background);
+  margin-right: var(--margin-xm);
+  border-radius: 0 var(--radius-md) 0 0;
+}
+
+.product-list .product-title {
+  margin-bottom: var(--margin-lg);
+}
+
+.wrapper-tabheading {
+  display: flex;
+  gap: var(--gap-xm);
+}
+
+.wrapper-tabheading .text-regular {
+  padding-bottom: var(--padding-sm);
+  border-bottom: var(--border-sm);
+  border-color: transparent;
+}
+
+.wrapper-tabheading .text-regular:hover,
+.wrapper-tabheading .text-active {
+  cursor: pointer;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  border-color: var(--color-primary);
+}
+
+.wrapper-tools {
+  padding: var(--padding-lg) 0;
+  border-top: var(--border-xs);
+}
+
+.wrapper-tools .form-group {
+  width: 291px;
+  display: flex;
+  gap: var(--gap-sm);
+  padding: var(--padding-md) var(--padding-sm);
+}
+
+.search-icon:hover {
+  cursor: pointer;
+}
+
+.search-input {
+  flex: 1;
+  background-color: transparent;
+}
+
+.search-input::placeholder {
+  color: var(--color-input);
+}
+
+.search-input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.wrapper-tools  .btn-primary .text-regular {
+  margin-left: var(--margin-sm);
+  color: var(--color-light);
+}
+
+.no-product-found {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--gap-md);
+}
+
+.loading-spinner {
+  flex: 1;
+  color: var(--color-input);
+}
+
+.loading-spinner .fa-lg {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .product-list {
+    padding: var(--padding-xm);
+    margin-right: unset;
+  }
+
+  .product-list .product-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--margin-md);
+  }
+
+  .wrapper-tools {
+    padding: var(--padding-xm) 0;
+    gap: var(--gap-xm);
+  }
+
+  .wrapper-tools .form-group {
+    width: 100%;
+  }
+
+  .wrapper-tools .btn-primary .text-regular {
+    display: none;
+  }
+
+  .loading-spinner .fa-lg {
+    display: block;
+  }
+
+  .loading-spinner .fa-3x {
+    display: none;
+  }
+}

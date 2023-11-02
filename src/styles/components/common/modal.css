@@ -1,0 +1,154 @@
+.modal {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.modal .btn {
+  padding: var(--padding-sm) var(--padding-lg);
+}
+
+.overlay {
+  background-color: var(--color-overlay);
+}
+
+.add-modal,
+.delete-modal {
+  position: absolute;
+  padding: var(--padding-xl);
+  border-radius: var(--radius-md);
+  background-color: var(--color-light);
+  box-shadow: var(--box-shadow-modal);
+}
+
+.add-modal,
+.delete-modal {
+  visibility: hidden;
+  flex-direction: column;
+  gap: var(--gap-lg);
+}
+
+.wrapper-heading .fa-xmark {
+  display: none;
+  padding: var(--padding-xs);
+}
+
+.wrapper-heading .fa-xmark:hover {
+  cursor: pointer;
+  background-color: var(--color-border);
+}
+
+.add-modal .modal-title {
+  text-align: center;
+}
+
+.add-modal .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+.add-modal .form-group .wrapper-input {
+  position: relative;
+  display: flex;
+  gap: var(--gap-sm);
+}
+
+.wrapper-input .input-label {
+  width: 65px;
+  text-align: right;
+}
+
+.wrapper-input .input-field {
+  width: 340px;
+  height: 33px;
+  padding-left: var(--padding-sm);
+  border: var(--border-xs);
+  border-radius: var(--radius-sm);
+}
+
+.wrapper-input .input-field:focus {
+  border-color: var(--color-dark);
+}
+
+.wrapper-input .invalid-field {
+  border-color: var(--color-secondary);
+}
+
+.form-group .text-warning {
+  visibility: hidden;
+}
+
+.modal .wrapper-btn {
+  gap: var(--gap-xm);
+  font-weight: var(--font-weight-medium);
+}
+
+.delete-modal .modal-title {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-lg);
+  text-align: center;
+}
+
+.delete-modal .fa-trash {
+  color: var(--color-input);
+}
+
+.overlay-close {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 767px) {
+  .modal .text-regular {
+    font-size: var(--font-size-sm);
+  }
+
+  .modal .modal-title {
+    font-size: var(--font-size-md);
+  }
+
+  .add-modal,
+  .delete-modal {
+    justify-content: start;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: unset;
+    padding: var(--padding-xm);
+  }
+
+  .wrapper-heading,
+  .form-group {
+    width: 100%;
+  }
+
+  .wrapper-heading {
+    justify-content: space-between;
+    border-bottom: var(--border-xs);
+  }
+
+  .wrapper-heading .fa-xmark {
+    display: block;
+  }
+
+  .wrapper-input {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .wrapper-input .input-label {
+    width: unset;
+    text-align: left;
+  }
+
+  .wrapper-input .input-field {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

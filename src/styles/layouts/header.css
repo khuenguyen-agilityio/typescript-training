@@ -1,0 +1,62 @@
+.header {
+  padding: var(--padding-lg);
+}
+
+.logo-link .text-logo {
+  padding-left: var(--padding-sm);
+}
+
+.btn-menu,
+.btn-feature {
+  padding: unset;
+  background-color: transparent;
+}
+
+.btn-menu {
+  margin-left: var(--margin-xl);
+}
+
+.wrapper-features .wrapper-item {
+  padding: 0 var(--padding-lg);
+  border-left: var(--border-xs);
+  border-right: var(--border-xs);
+}
+
+.question {
+  margin-right: var(--margin-xs);
+}
+
+.notification {
+  margin-left: var(--margin-xm);
+  margin-right: var(--margin-xm);
+}
+
+.avatar-img {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  margin-left: var(--margin-sm);
+  margin-right: var(--margin-sm);
+}
+
+.account-name {
+  font-weight: var(--font-weight-semibold);
+}
+
+.arrow-down {
+  margin-left: var(--margin-md);
+}
+
+@media (max-width: 767px) {
+  .wrapper-logo {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .wrapper-logo .text-logo {
+    display: none;
+  }
+
+  .wrapper-features {
+    display: none ;
+  }
+}
