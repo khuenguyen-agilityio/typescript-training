@@ -1,5 +1,5 @@
 // Import DOM helper
-import { querySelector, querySelectorAll } from '../utils/helpers';
+import { querySelector, querySelectorAll } from "@/utils/helpers";
 
 // Layouts & components
 export const tableProduct = querySelector<HTMLUListElement>('.table-bordered');

@@ -2,7 +2,7 @@ export interface Product {
   id: number;
   name: string;
   price: number;
-  isBestSeller: boolean;
+  isBestSeller: true;
 }
 
-export interface ProductDto extends Pick<Product, 'price' | 'name'> {}
+export interface ProductForm extends Pick<Product, 'price' | 'name'> {}

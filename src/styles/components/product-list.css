@@ -19,6 +19,7 @@
 }
 
 .wrapper-tabheading .text-regular {
+  background-color: unset;
   padding-bottom: var(--padding-sm);
   border-bottom: var(--border-sm);
   border-color: transparent;

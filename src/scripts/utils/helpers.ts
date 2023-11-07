@@ -1,9 +1,9 @@
 // Import visibility value
-import { VISIBILITY } from '../constants';
+import { VISIBILITY } from '@/constants';
 
 // Import text warning DOM
-import { inputFields, textWarning } from '../dom';
-import { Product } from '../interfaces/product';
+import { inputFields, textWarning } from '@/dom';
+import { Product } from '@/interfaces/product';
 
 /*
  * displayWarningMessage() display warning message

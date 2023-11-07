@@ -10,15 +10,6 @@
     <title>FoodRar</title>
     <link rel="icon" href="assets/icons/food-rar.svg" />
     <link rel="stylesheet" href="styles/main.css" />
-    <!-- <link
-      rel="preload"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    > -->
     <link
       rel="preload"
       as="style"
@@ -41,13 +32,12 @@
     <header class="header d-flex-between-center">
       <div class="wrapper-logo d-flex-center-center">
         <a class="logo-link d-flex-center-center" href="#">
-          <span
-            ><img
-              src="assets/icons/card-logo.svg"
-              alt="Card blue logo"
-              width="28"
-              height="24"
-          /></span>
+          <img
+            src="assets/icons/card-logo.svg"
+            alt="Card blue logo"
+            width="28"
+            height="24"
+          />
           <span class="text-logo">FOODRAR</span>
         </a>
         <button
@@ -130,12 +120,12 @@
         </aside>
         <section class="product-list">
           <h1 class="product-title text-heading">Products</h1>
-          <ul class="wrapper-tabheading">
-            <li class="text-regular text-active" id="all-products-tab">
+          <div class="wrapper-tabheading">
+            <button class="text-regular text-active" id="all-products-tab">
               All products
-            </li>
-            <li class="text-regular" id="best-seller-tab">Best seller</li>
-          </ul>
+            </button>
+            <button class="text-regular" id="best-seller-tab">Best seller</button>
+          </div>
           <div class="wrapper-tools d-flex-between-center">
             <form class="form-group" id="form-search">
               <img
@@ -201,7 +191,6 @@
                 step="0.01"
                 name="product-price"
                 min="0"
-                oninput="this.value = this.value.replace(/-/g, '');"
                 required
               />
             </div>

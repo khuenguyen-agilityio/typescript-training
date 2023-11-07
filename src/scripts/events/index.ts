@@ -1,5 +1,5 @@
 // Import constants
-import { DISPLAY, MODAL_TYPE, STATUS, TABS, VISIBILITY } from '../constants';
+import { DISPLAY, MODAL_TYPE, STATUS, TABS, VISIBILITY } from '@/constants';
 
 // Import DOM Manipulation
 import {
@@ -25,7 +25,7 @@ import {
   inputFields,
   overlayClose,
   modalCloseButton,
-} from '../dom';
+} from '@/dom';
 
 // Import main sections
 import {
@@ -33,23 +33,23 @@ import {
   deleteProductById,
   editProductById,
   getAllProducts,
-} from '../services/productService';
+} from '@/services/productService';
 
 // Import render products function
-import { createToast, renderProducts, renderSidebar } from '../render';
+import { createToast, renderProducts, renderSidebar } from '@/render';
 
 // Import utils
-import { checkValidate } from '../utils/validate';
-import { filterArrayByValue } from '../utils/helpers';
+import { checkValidate } from '@/utils/validate';
+import { filterArrayByValue } from '@/utils/helpers';
 
 // Import message title
-import { MESSAGE_TITLE } from '../constants/message';
-import { Product, ProductDto } from '../interfaces/product';
-import { ModalType } from '../interfaces/common';
+import { MESSAGE_TITLE } from '@/constants/message';
+import { Product, ProductForm } from '@/interfaces/product';
+import { ModalType } from '@/interfaces/common';
 
 let isBestSeller = false;
 let isShowed = false;
-let currentId: number | undefined;
+let currentId = -1;
 
 /*
  * eventLoader() contains all events of my application
@@ -60,19 +60,7 @@ export const eventLoader = () => {
   renderSidebar();
 
   // Common modal Events
-  buttonCancelModalDelete.addEventListener('click', toggleModalConfirm);
-
-  // Modal Update Events
-  formUpdate.addEventListener('submit', submitForm);
   buttonAdd.addEventListener('click', toggleModalUpdate);
-  overlayClose.addEventListener('click', closeModal);
-  modalCloseButton.forEach((button) => {
-    button.addEventListener('click', closeModal);
-  });
-
-  // Modal Confirm Events
-  buttonCancelModalAdd.addEventListener('click', toggleModalUpdate);
-  buttonConfirmDelete.addEventListener('click', handleDeleteProduct);
 
   // Search events
   formSearch.addEventListener('submit', (event) => {
@@ -94,7 +82,7 @@ export const eventLoader = () => {
 const handleRenderAllProducts = async () => {
   toggleLoadingSpinner(true);
   try {
-    const response = await getAllProducts();
+    const response: Product[] = await getAllProducts();
     renderProducts(response, isBestSeller);
   } catch (error) {
     createToast(STATUS.ERROR, (error as Error).message);
@@ -112,22 +100,24 @@ const handleRenderAllProducts = async () => {
  */
 const submitForm = async (event: Event) => {
   event.preventDefault();
+  textWarning.forEach((warning: HTMLParagraphElement) => {
+    warning.style.visibility = VISIBILITY.HIDDEN;
+  });
+
   const submitButton = (event.target as HTMLFormElement).querySelector(
     'input[type="submit"]',
   ) as HTMLButtonElement;
-  textWarning.forEach((warning) => {
-    warning.style.visibility = VISIBILITY.HIDDEN;
-  });
   const formData = new FormData(formUpdate);
-  const product: ProductDto = {
+  const product: ProductForm = {
     name: (formData.get('product-name') as string).trim(),
     price: Number(formData.get('product-price')),
   };
+
   if (checkValidate(product)) {
     try {
-      let response;
+      let response: string;
       submitButton.disabled = true;
-      currentId
+      currentId !== -1
         ? (response = await editProductById(currentId, product))
         : (response = await addNewProduct(product));
       toggleModalUpdate();
@@ -162,7 +152,7 @@ export const showEditModal = async (product: Product) => {
 export const handleDeleteProduct = async () => {
   buttonConfirmDelete.disabled = true;
   try {
-    const response = await deleteProductById(currentId);
+    const response: string = await deleteProductById(currentId);
     await handleRenderAllProducts();
     createToast(STATUS.SUCCESS, response);
   } catch (error) {
@@ -182,10 +172,12 @@ export const handleSearchProduct = async (event: Event) => {
   event.preventDefault();
   tableProduct.innerHTML = '';
   noProductFound.style.display = DISPLAY.NONE;
+  toggleLoadingSpinner(true);
+
   const formData = new FormData(formSearch);
   const searchString = formData.get('search-field') as string;
-  toggleLoadingSpinner(true);
-  const products = await getAllProducts();
+  const products: Product[] = await getAllProducts();
+
   searchString === ''
     ? renderProducts(products, isBestSeller)
     : searchProductsByName(products, searchString);
@@ -198,7 +190,7 @@ export const handleSearchProduct = async (event: Event) => {
  * Each tab will has its id and function
  */
 const handleSwitchTabs = () => {
-  tabHeadings.forEach((tab) => {
+  tabHeadings.forEach((tab: HTMLElement) => {
     tab.addEventListener('click', async function () {
       if (!this.classList.contains('text-active')) {
         tableProduct.innerHTML = '';
@@ -224,8 +216,8 @@ const handleSwitchTabs = () => {
  */
 const handleInputField = () => {
   let index = 0;
-  inputFields.forEach((field) => {
-    const order = index;
+  inputFields.forEach((field: HTMLInputElement) => {
+    const order: number = index;
     if (field.classList.contains('invalid-field')) {
       field.addEventListener('click', () => {
         field.classList.remove('invalid-field');
@@ -243,7 +235,7 @@ const handleInputField = () => {
  * @param searchString
  */
 const searchProductsByName = (products: Product[], searchString: string) => {
-  const searchProducts = filterArrayByValue(products, searchString);
+  const searchProducts: Product[] = filterArrayByValue(products, searchString);
   renderProducts(searchProducts, isBestSeller);
 };
 
@@ -261,10 +253,22 @@ const toggleModal = (type: ModalType, title: string) => {
     modalOverlay.style.visibility = VISIBILITY.VISIBLE;
     switch (type) {
       case MODAL_TYPE.UPDATE:
+        formUpdate.addEventListener('submit', submitForm);
+        buttonCancelModalAdd.addEventListener('click', toggleModalUpdate);
+        overlayClose.addEventListener('click', closeModal);
+        modalCloseButton.forEach((button: HTMLButtonElement) => {
+          button.addEventListener('click', closeModal);
+        });
+        inputFields[1].addEventListener('input', function () {
+          this.value = this.value.replace(/-/g, '');
+        });
         modalAdd.style.visibility = VISIBILITY.VISIBLE;
         titleModalAdd.innerHTML = title;
         break;
       case MODAL_TYPE.CONFIRM:
+        buttonCancelModalDelete.addEventListener('click', toggleModalConfirm);
+        buttonConfirmDelete.addEventListener('click', handleDeleteProduct);
+        overlayClose.addEventListener('click', closeModal);
         modalDelete.style.visibility = VISIBILITY.VISIBLE;
         titleModalDelete.innerHTML = title;
         break;
@@ -319,7 +323,7 @@ const toggleLoadingSpinner = (status: boolean) => {
  * @param className
  */
 const resetTabs = (className: string) => {
-  tabHeadings.forEach((tab) => {
+  tabHeadings.forEach((tab: HTMLElement) => {
     tab.classList.remove(className);
   });
 };
@@ -328,10 +332,10 @@ const resetTabs = (className: string) => {
  * resetFormUpdate() will reset form update & invalid display of form
  */
 const resetFormUpdate = () => {
-  textWarning.forEach((warning) => {
+  textWarning.forEach((warning: HTMLParagraphElement) => {
     warning.style.visibility = VISIBILITY.HIDDEN;
   });
-  inputFields.forEach((field) => {
+  inputFields.forEach((field: HTMLInputElement) => {
     field.classList.remove('invalid-field');
   });
   formUpdate.reset();
@@ -343,7 +347,7 @@ const resetFormUpdate = () => {
 const closeModal = () => {
   resetFormUpdate();
   isShowed = false;
-  currentId = undefined;
+  currentId = -1;
   modalOverlay.style.visibility = VISIBILITY.HIDDEN;
   modalAdd.style.visibility = VISIBILITY.HIDDEN;
   modalDelete.style.visibility = VISIBILITY.HIDDEN;

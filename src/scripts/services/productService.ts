@@ -1,13 +1,13 @@
 /*
  * Import base url
  */
-import { BASE_URL } from '../constants/apis';
+import { BASE_URL } from '@/constants/apis';
 
 /*
  * Import messages
  */
-import { MESSAGE_ERROR, MESSAGE_SUCCESS } from '../constants/message';
-import { Product, ProductDto } from '../interfaces/product';
+import { MESSAGE_ERROR, MESSAGE_SUCCESS } from '@/constants/message';
+import { Product, ProductForm } from '@/interfaces/product';
 
 const productUrl = `${BASE_URL}/products`;
 
@@ -16,9 +16,9 @@ const productUrl = `${BASE_URL}/products`;
  * It will display error toast when get products unsuccessfully
  */
 export const getAllProducts = async (): Promise<Product[]> => {
-  const response = await fetch(productUrl);
+  const response: Response = await fetch(productUrl);
   if (!response.ok) throw new Error(MESSAGE_ERROR.GET_ALL_PRODUCT);
-  const data = await response.json();
+  const data: Product[] = await response.json();
   return data;
 };
 
@@ -28,7 +28,7 @@ export const getAllProducts = async (): Promise<Product[]> => {
  * It will display error toast when add new product unsuccessfully
  * @param product
  */
-export const addNewProduct = async (product: ProductDto): Promise<string> => {
+export const addNewProduct = async (product: ProductForm): Promise<string> => {
   const config = {
     method: 'POST',
     headers: {
@@ -36,7 +36,7 @@ export const addNewProduct = async (product: ProductDto): Promise<string> => {
     },
     body: JSON.stringify(product),
   };
-  const response = await fetch(productUrl, config);
+  const response: Response = await fetch(productUrl, config);
   if (!response.ok) throw new Error(`${MESSAGE_ERROR.ADD_PRODUCT}`);
   return MESSAGE_SUCCESS.ADD_PRODUCT;
 };
@@ -49,7 +49,7 @@ export const addNewProduct = async (product: ProductDto): Promise<string> => {
  */
 export const editProductById = async (
   productId: number,
-  product: ProductDto,
+  product: ProductForm,
 ): Promise<string> => {
   const config = {
     method: 'PUT',
@@ -58,7 +58,7 @@ export const editProductById = async (
     },
     body: JSON.stringify(product),
   };
-  const response = await fetch(productUrl + `/${productId}`, config);
+  const response: Response = await fetch(productUrl + `/${productId}`, config);
   if (!response.ok) throw new Error(`${MESSAGE_ERROR.EDIT_PRODUCT}`);
   return MESSAGE_SUCCESS.EDIT_PRODUCT;
 };
@@ -69,14 +69,14 @@ export const editProductById = async (
  * It will display error toast when delete product unsuccessfully
  * @param productId
  */
-export const deleteProductById = async (productId: number | undefined): Promise<string> => {
+export const deleteProductById = async (productId: number): Promise<string> => {
   const config = {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
   };
-  const response = await fetch(productUrl + `/${productId}`, config);
+  const response: Response = await fetch(productUrl + `/${productId}`, config);
   if (!response.ok) throw new Error(`${MESSAGE_ERROR.DELETE_PRODUCT}`);
   return MESSAGE_SUCCESS.DELETE_PRODUCT;
 };

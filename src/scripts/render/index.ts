@@ -1,6 +1,6 @@
 // Import constants
-import { DISPLAY, TOAST_TIME_OUT, TOAST_TYPE } from '../constants';
-import { SIDEBAR_ITEMS } from '../constants/sidebar';
+import { DISPLAY, TOAST_TIME_OUT, TOAST_TYPE } from '@/constants';
+import { SIDEBAR_ITEMS } from '@/constants/sidebar';
 
 // Import button & table DOM
 import {
@@ -10,21 +10,17 @@ import {
   notifications,
   sidebarList,
   tableProduct,
-} from '../dom';
+} from '@/dom';
 
 // Import event
-import {
-  setCurrentId,
-  showEditModal,
-  toggleModalConfirm,
-} from '../events';
+import { setCurrentId, showEditModal, toggleModalConfirm } from '@/events';
 
 //Import interface
-import { Product } from '../interfaces/product';
-import { ToastType } from '../interfaces/common';
+import { Product } from '@/interfaces/product';
+import { ToastType } from '@/interfaces/common';
 
 // Import utils
-import { filterArrayByValue } from '../utils/helpers';
+import { filterArrayByValue } from '@/utils/helpers';
 
 /*
  * renderProducts() will render all products into a table
@@ -39,8 +35,8 @@ export const renderProducts = (products: Product[], isBestSeller: boolean) => {
     <p class="table-item item-active">NO</p>
     <p class="table-item item-active">PRODUCT NAME</p>
     <p class="table-item item-active">PRICE</p>
-    <p class="table-item item-active">ACTIONS</p>
-  `;
+    <p class="table-item item-active">ACTIONS</p>`;
+
     const tableRow = document.createElement('li');
     tableRow.className = 'table-row item-active';
     tableRow.innerHTML = temp;
@@ -50,24 +46,25 @@ export const renderProducts = (products: Product[], isBestSeller: boolean) => {
       : products.reverse();
     products.forEach((product: Product) => {
       temp = `
-    <p class="table-item">${order}</p>
-    <p class="table-item">${product.name}</p>
-    <p class="table-item item-active">$${product.price}</p>
-    <div class="wrapper-btn d-flex-center-center">
-      <button id="edit-${product.id}" class="btn btn-primary" aria-label="This button open update modal">
-        <p class="text-regular">Update</p>
-        <i class="fa-solid fa-pencil"></i>
+      <p class="table-item">${order}</p>
+      <p class="table-item">${product.name}</p>
+      <p class="table-item item-active">$${product.price}</p>
+      <div class="wrapper-btn d-flex-center-center">
+        <button id="edit-${product.id}" class="btn btn-primary" aria-label="This button open update modal">
+          <p class="text-regular">Update</p>
+          <i class="fa-solid fa-pencil"></i>
+          </button>
+        <button id="delete-${product.id}" class="btn btn-secondary" aria-label="This button open the confirm delete modal">
+          <p class="text-regular">Delete</p>
+          <i class="fa-solid fa-eraser"></i>
         </button>
-      <button id="delete-${product.id}" class="btn btn-secondary" aria-label="This button open the confirm delete modal">
-        <p class="text-regular">Delete</p>
-        <i class="fa-solid fa-eraser"></i>
-      </button>
-    </div>
-    `;
+      </div>`;
+
       const newRow = document.createElement('li');
       newRow.className = 'table-row';
       newRow.innerHTML = temp;
       tableProduct.appendChild(newRow);
+
       buttonEdit(product.id).addEventListener('click', () => {
         showEditModal(product);
       });

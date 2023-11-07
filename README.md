@@ -9,7 +9,7 @@
 ## Goals
 
 - Apply knowledge of HTML/CSS
-- Get familiar with TypeScript syntax
+- Get familiar with JavaScript & TypeScript syntax
 - Know the basic differences between asynchronous and synchronous
 - Understand and apply DOM Manipulation
 - Use DevTools for debugging issues
@@ -28,6 +28,7 @@
   - Eslint v8.47.0
   - Commitlint v17.7.1
   - Husky v8.0.0
+  - Vercel
 - Editor: Visual Studio Code
 
 ## Requirements
@@ -45,6 +46,14 @@
   - Validate input data and show errors if invalid
 
 ## Getting Started
+
+| Command                                                                     | Action                                    |
+| --------------------------------------------------------------------------- | ----------------------------------------- |
+| `git clone git@gitlab.asoft-python.com:khue.nguyen/typescript-training.git` | Clone repository from GitLab              |
+| `git checkout remotes/origin/feature/foodrar-practice`                      | Checkout branch                           |
+| `cd typescript-training`                                                    | Change directory                          |
+| `pnpm install`                                                              | Install dependencies                      |
+| `pnpm start`                                                                | Starts local dev server at localhost:1234 |
 
 ## Authors
 

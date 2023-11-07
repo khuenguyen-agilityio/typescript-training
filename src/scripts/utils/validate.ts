@@ -1,21 +1,20 @@
 // Import REGEX
-import { PRODUCT_NAME_REGEX } from '../constants';
+import { PRODUCT_NAME_REGEX } from '@/constants';
 
 // Import message
-import { MESSAGE_ERROR } from '../constants/message';
+import { MESSAGE_ERROR } from '@/constants/message';
 
 //Import interface
-import { ProductDto } from '../interfaces/product';
+import { ProductForm } from '@/interfaces/product';
 
 // Import helper function
-import { displayWarningMessage } from './helpers';
+import { displayWarningMessage } from '@/utils/helpers';
 
 /*
  * isValidProduct() validate field and display warning message
  * @param value
- TODO : find another way to optimize this code
  */
-export const checkValidate = (value: ProductDto) => {
+export const checkValidate = (value: ProductForm) => {
   let isValid = true;
   if (value.name === '') {
     isValid = false;
